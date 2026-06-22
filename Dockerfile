@@ -31,6 +31,7 @@ COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/package-lock.json* ./package-lock.json
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/server.js ./server.js
 
 # Run as non-root.
 RUN useradd -m -u 1001 nodejs
@@ -38,6 +39,6 @@ USER nodejs
 
 EXPOSE 8080
 
-# TanStack Start server entry. TanStack Start 1.167+ emits the server bundle
-# at dist/server/server.js (Nitro-style preset).
-CMD ["node", "dist/server/server.js"]
+# Node.js entry wrapper. `server.js` imports the TanStack Start fetch
+# handler from dist/server/server.js and binds it to an HTTP listener.
+CMD ["node", "server.js"]
