@@ -1,0 +1,21 @@
+# Railway
+railway.toml
+.railway/
+
+# Nixpacks (alternative builder output, in case Railway picks it)
+.nixpacks/
+
+# Docker
+.dockerignore
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+dist
+.output
+.vinxi
+.nitro
+node_modules
